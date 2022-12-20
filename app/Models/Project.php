@@ -16,4 +16,7 @@ class Project extends Model
         return $this->belongsToMany(Tag::class, 'projects_tags', 'project_id', 'tag_id')
             ->withPivot(['project_id', 'tag_id', 'created_at']);
     }
+    public function imagePath(){
+        return asset('images/default-project.svg');
+    }
 }
