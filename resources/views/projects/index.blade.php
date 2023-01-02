@@ -24,7 +24,7 @@
                                     <th scope="row">{{$key+1}}</th>
                                     <td>{{$project->title}}</td>
                                     <td>{{$project->link_app}}</td>
-                                    <td><img src="{{$project->imagePath()}}" /></td>
+                                    <td><img style="max-height:150px;" src="{{$project->imagePath()}}" /></td>
                                     <td>
                                         <a class="btn btn-primary" href="#">Update</a>
                                         <a class="btn btn-danger" href="#">Delete</a>

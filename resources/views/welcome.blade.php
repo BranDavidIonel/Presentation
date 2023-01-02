@@ -10,7 +10,7 @@
                     <div class="card-body row align-content-center">
                         @foreach($projects as $project)
                             <div class="card col-md-4 card-size">
-                                <img class="card-img-top" src="{{asset("images/default-project.svg")}}"
+                                <img class="card-img-top" src="{{$project->imagePath()}}"
                                      alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">{{$project->title}}</h5>
