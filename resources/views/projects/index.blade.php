@@ -26,8 +26,12 @@
                                     <td>{{$project->link_app}}</td>
                                     <td><img style="max-height:150px;" src="{{$project->imagePath()}}" /></td>
                                     <td>
-                                        <a class="btn btn-primary" href="#">Update</a>
-                                        <a class="btn btn-danger" href="#">Delete</a>
+                                        <a class="btn btn-primary" href="{{route('projects.show-edit',$project->id)}}">Update</a>
+                                        <form role="form" method="POST" action="{{route('projects.delete',$project->id)}}" style="display: inline;">
+                                            @method('delete')
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger" href="#">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
