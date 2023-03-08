@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 class ServiceGetIpInfo
@@ -15,10 +16,10 @@ class ServiceGetIpInfo
     private const LATITUDE = 'latitude';
     private const  LONGITUDE = 'longitude';
 
-    public function __construct()
+    public function __construct(Request $request)
     {
         $client = new Client();
-        $ipAddress = $this->getPublicIpAddress();
+        $ipAddress = $request->getClientIp();
         $url = "https://ipinfo.io/{$ipAddress}/json";
         $response = $client->request('GET', $url);
         $data = json_decode($response->getBody(), true);
@@ -34,14 +35,14 @@ class ServiceGetIpInfo
         ];
     }
 
-    private function getPublicIpAddress()
-    {
-        $client = new Client();
-        $url = "https://api.ipify.org?format=json";
-        $response = $client->request('GET', $url);
-        $data = json_decode($response->getBody(), true);
-        return $data['ip'];
-    }
+//    private function getPublicIpAddress()
+//    {
+//        $client = new Client();
+//        $url = "https://api.ipify.org?format=json";
+//        $response = $client->request('GET', $url);
+//        $data = json_decode($response->getBody(), true);
+//        return $data['ip'];
+//    }
 
     public function getAllInfo(): array
     {
