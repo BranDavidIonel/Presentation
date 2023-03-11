@@ -3,12 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
+use Opcodes\LogViewer\Http\Controllers\IndexController;
 
 Route::get('/', [ProjectController::class, 'index'])->name('top-projects');
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth', 'is.admin']], function () {
+    Route::get('/{view?}', IndexController::class)
+        ->where('view', '(.*)')
+        ->name('log-viewer.index');
     Route::prefix('projects')->group(function () {
         Route::get('/create', [ProjectController::class, 'showCreate'])->name('projects.show-create');
         Route::get('{project}/edit', [ProjectController::class, 'showEdit'])->name('projects.show-edit');
